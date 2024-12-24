@@ -5,12 +5,21 @@
         </a>
 
         <nav class="flex items-center gap-4">
-            <a href="/create">Create</a>
+            @auth
+                <a href="/create">Create</a>
 
-            <form action="/">
-                @csrf
-                <button type="submit" class="px-4 py-1.5 bg-blue-500 text-white rounded-lg">Logout</button>
-            </form>
+                <form action="/">
+                    @csrf
+                    <x-base.button as="button" type="submit">
+                        Logout
+                    </x-base.button>
+                </form>
+            @endauth
+
+            @guest
+                <a href="/login">Log In</a>
+                <a href="/register">Register</a>
+            @endguest
         </nav>
     </div>
 </header>
