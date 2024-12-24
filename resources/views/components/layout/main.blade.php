@@ -16,7 +16,7 @@
 
     <x-layout.header />
 
-    <main class="container mx-auto px-3 my-10 lg:my-12">
+    <main class="max-w-4xl mx-auto px-3 my-10 lg:my-12">
         {{ $slot }}
     </main>
 </body>
