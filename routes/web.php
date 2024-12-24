@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Route;
 Route::controller(NotesController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/create', 'create');
-    Route::get('/edit', 'edit');
-    Route::get('/show/{note}', 'show');
+    Route::get('/edit/{note}', 'edit');
+    Route::get('/note/{note}', 'show');
 
     Route::post('/show', 'save');
     Route::patch('/edit/{id}', 'update');
