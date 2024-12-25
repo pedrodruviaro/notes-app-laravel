@@ -11,10 +11,11 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
+
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->cascadeOnDelete();
             $table->string('title', 255);
             $table->string('content');
             $table->timestamps();
