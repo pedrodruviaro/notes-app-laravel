@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Note;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class NotesController extends Controller
 {
     public function index(): View
     {
-        return view('notes.index');
+        $userId = Auth::user()->id;
+        $notes = Note::where('user_id', $userId)->whereNull('deleted_at')->latest()->paginate(5);
+
+        return view('notes.index', ['notes' => $notes]);
     }
 
     public function show(): View
