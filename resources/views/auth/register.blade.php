@@ -7,7 +7,7 @@
 
             <label class="grid gap-1 font-semibold">
                 Name
-                <input class="px-4 py-2 border rounded-md font-normal" placeholder="John Doe" name="email"
+                <input class="px-4 py-2 border rounded-md font-normal" placeholder="John Doe" name="name"
                     value="{{ old('name') }}">
                 @error('name')
                     <p class="text-red-400">{{ $message }}</p>

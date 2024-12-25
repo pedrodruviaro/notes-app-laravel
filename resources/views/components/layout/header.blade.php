@@ -8,7 +8,7 @@
             @auth
                 <a href="/create">Create</a>
 
-                <form action="/">
+                <form action="/logout" method="POST">
                     @csrf
                     <x-base.button as="button" type="submit">
                         Logout

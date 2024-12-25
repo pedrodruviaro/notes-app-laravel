@@ -4,22 +4,26 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NotesController;
 use Illuminate\Support\Facades\Route;
 
-Route::controller(NotesController::class)->group(function () {
-    Route::get('/', 'index');
-    Route::get('/create', 'create');
-    Route::get('/edit/{note}', 'edit');
-    Route::get('/note/{note}', 'show');
+Route::middleware(['auth'])->group(function () {
+    Route::controller(NotesController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/create', 'create');
+        Route::get('/edit/{note}', 'edit');
+        Route::get('/note/{note}', 'show');
 
-    Route::post('/show', 'save');
-    Route::patch('/edit/{id}', 'update');
-    Route::delete('/delete/{id}', 'destroy');
+        Route::post('/show', 'save');
+        Route::patch('/edit/{id}', 'update');
+        Route::delete('/delete/{id}', 'destroy');
+    });
 });
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'login')->name('login');
-    Route::get('/register', 'register')->name('register');
+    Route::get('/login', 'login')->name('login')->middleware(['guest']);
+    Route::get('/register', 'register')->name('register')->middleware(['guest']);
 
-    Route::post('/logout', 'logout');
-    Route::post('/destroy', 'destroy');
-    Route::post('/update', 'update');
+    Route::post('/login', 'login_user')->middleware(['guest']);
+    Route::post('/register', 'save')->middleware(['guest']);
+    Route::post('/logout', 'logout')->middleware(['auth']);
+    Route::post('/destroy', 'destroy')->middleware(['auth']);
+    Route::post('/update', 'update')->middleware(['auth']);
 });
