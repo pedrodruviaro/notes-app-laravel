@@ -7,6 +7,7 @@
         <nav class="flex items-center gap-4">
             @auth
                 <a href="/create">Create</a>
+                <a href="/deleted">Archived</a>
 
                 <form action="/logout" method="POST">
                     @csrf

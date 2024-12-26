@@ -10,7 +10,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/create', 'create');
         Route::get('/edit/{note}', 'edit');
         Route::get('/note/{note}', 'show');
+        Route::get('/deleted', 'show_deleted');
 
+        Route::post('/restore/{id}', 'restore');
         Route::post('/create', 'save');
         Route::patch('/edit/{note}', 'update');
         Route::delete('/delete/{note}', 'destroy');

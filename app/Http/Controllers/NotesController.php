@@ -97,4 +97,27 @@ class NotesController extends Controller
 
         return redirect('/');
     }
+
+    public function show_deleted(): View
+    {
+        $user_id = Auth::user()->id;
+        $notes = Note::withTrashed()->where('user_id', $user_id)->whereNotNull('deleted_at')->latest()->paginate(5);
+
+        return view('notes.deleted', ['notes' => $notes]);
+    }
+
+    public function restore(string $id): RedirectResponse
+    {
+        $user_id = Auth::user()->id;
+
+        $note = Note::withTrashed()->where('id', $id)->where('user_id', $user_id)->first();
+
+        if (!$note) {
+            abort(404);
+        }
+
+        $note->restore();
+
+        return redirect("/note/{$note->id}");
+    }
 }
