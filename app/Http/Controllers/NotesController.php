@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -16,9 +17,15 @@ class NotesController extends Controller
         return view('notes.index', ['notes' => $notes]);
     }
 
-    public function show(): View
+    public function show(Note $note): View
     {
-        return view('notes.show');
+        $user_id = Auth::user()->id;
+
+        if ($note->user_id != $user_id) {
+            abort(404);
+        }
+
+        return view('notes.show', ['note' => $note]);
     }
 
     public function create(): View

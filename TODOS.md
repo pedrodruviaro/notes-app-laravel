@@ -6,7 +6,7 @@
 -   [x] Home (notas) -> ordenar por criação e fazer paginação
 -   [ ] Criar nota
 -   [ ] Editar nota
--   [ ] Ver detalhe da nota
+-   [x] Ver detalhe da nota
 -   [ ] Apagar nota (soft delete)
 -   [ ] Página de notas apagadas
 -   [ ] Ao apagar o usuário, apagar todas as notas dele
