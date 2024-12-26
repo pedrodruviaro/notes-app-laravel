@@ -16,7 +16,7 @@
 -   [x] Componente formulário
 -   [x] Componente de mensagem de erro
 -   [x] Componente de label com input e mensagem de erro
--   [ ] Componente de nav-link com marcação de página atual
+-   [x] Componente de nav-link com marcação de página atual
 
 -   [ ] Revisão do AuthController
 -   [ ] Revisão do NotesController

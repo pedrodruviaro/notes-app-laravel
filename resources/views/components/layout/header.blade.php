@@ -4,11 +4,14 @@
             <span class="font-mono text-xl">NotesApp</span>
         </a>
 
+
+        {{ request()->routeIs('profile') }}
+
         <nav class="flex items-center gap-4">
             @auth
-                <a href="/deleted">Profile</a>
-                <a href="/create">Create</a>
-                <a href="/deleted">Archived</a>
+                <x-nav-link href="/profile" :active="request()->is('profile')">Profile</x-nav-link>
+                <x-nav-link href="/create" :active="request()->is('create')">Create</x-nav-link>
+                <x-nav-link href="/deleted" :active="request()->is('deleted')">Archived</x-nav-link>
 
                 <form action="/logout" method="POST">
                     @csrf
@@ -19,8 +22,8 @@
             @endauth
 
             @guest
-                <a href="/login">Log In</a>
-                <a href="/register">Register</a>
+                <x-nav-link href="/login" :active="request()->is('login')">Log In</x-nav-link>
+                <x-nav-link href="/register" :active="request()->is('register')">Register</x-nav-link>
             @endguest
         </nav>
     </div>
