@@ -1,7 +1,7 @@
 <x-layout.main title="Create">
     <x-base.page-title>Crete new note</x-base.page-title>
 
-    <form action="/login" method="POST" class="space-y-4">
+    <form action="/create" method="POST" class="space-y-4">
         @csrf
 
         <label class="grid gap-1 font-semibold">

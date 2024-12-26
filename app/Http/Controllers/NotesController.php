@@ -47,7 +47,19 @@ class NotesController extends Controller
         return view('notes.edit', ['note' => $note]);
     }
 
-    public function save(): void {}
+    public function save(Request $request): RedirectResponse
+    {
+        $attributes = $request->validate([
+            'title' => ['required', 'min:3', 'max:255', 'string'],
+            'content' => ['required', 'min:3', 'string'],
+        ]);
+
+        $note = new  Note($attributes);
+        $note->user_id = Auth::user()->id;
+        $note->save();
+
+        return redirect('/');
+    }
 
     public function update(Request $request, Note $note): RedirectResponse
     {

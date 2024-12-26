@@ -11,7 +11,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit/{note}', 'edit');
         Route::get('/note/{note}', 'show');
 
-        Route::post('/show', 'save');
+        Route::post('/create', 'save');
         Route::patch('/edit/{note}', 'update');
         Route::delete('/delete/{note}', 'destroy');
     });

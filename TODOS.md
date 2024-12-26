@@ -4,7 +4,7 @@
 -   [x] Logout
 -   [x] Register
 -   [x] Home (notas) -> ordenar por criação e fazer paginação
--   [ ] Criar nota
+-   [x] Criar nota
 -   [x] Editar nota
 -   [x] Ver detalhe da nota
 -   [x] Apagar nota (soft delete)
