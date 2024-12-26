@@ -31,24 +31,24 @@ class AuthController extends Controller
         );
 
         if (!Auth::attempt($credentials)) {
-            return redirect()->back()
-                ->withInput($request->only('email', 'remember'))
+            return back()
+                ->withInput($request->only('email'))
                 ->withErrors([
-                    'email' => 'Failed to login',
+                    'email' => 'Login failed. Please check your credentials.',
                 ]);
         }
 
         $request->session()->regenerate();
 
-        return redirect('/');
+        return redirect()->intended('/')->with('success', 'Welcome back!'); // msg can be used to show a toast notification
     }
 
-    public function save(Request $request): RedirectResponse
+    public function register_user(Request $request): RedirectResponse
     {
         $attributes = $request->validate(
             [
                 'name' => ['required', 'min:3', 'max:200'],
-                'email' => ['required', 'email', 'max:255'],
+                'email' => ['required', 'email', 'max:255', 'unique:users,email'],
                 'password' => ['required', Password::min(6), 'confirmed'],
             ]
         );
@@ -58,13 +58,17 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Account created successfully!'); // msg can be used to show a toast notification
     }
 
-    public function logout(): RedirectResponse
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
-        return redirect('/login');
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login')->with('success', 'You have been logged out!'); // msg can be used to show a toast notification
     }
 
     public function profile()
@@ -72,13 +76,20 @@ class AuthController extends Controller
         return view('profile.index');
     }
 
-    public function destroy(): RedirectResponse
+    public function destroyAccount(Request $request): RedirectResponse
     {
-        $user_id = Auth::user()->id;
+        $user = Auth::user();
 
-        User::destroy($user_id);
+        if (!$user) {
+            return redirect('/login')->withErrors(['error' => 'You need to be logged in to delete your account.']);
+        }
+
+        $user->delete();
+
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/login')->with('success', 'Your account has been removed!');
     }
 }
