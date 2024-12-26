@@ -5,7 +5,7 @@
 -   [x] Register
 -   [x] Home (notas) -> ordenar por criação e fazer paginação
 -   [ ] Criar nota
--   [ ] Editar nota
+-   [x] Editar nota
 -   [x] Ver detalhe da nota
 -   [ ] Apagar nota (soft delete)
 -   [ ] Página de notas apagadas
