@@ -20,14 +20,17 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'login')->name('login')->middleware(['guest']);
-    Route::get('/register', 'register')->name('register')->middleware(['guest']);
-    Route::get('/profile', 'profile')->middleware(['auth']);
+    Route::middleware(['guest'])->group(function () {
+        Route::get('/login', 'login')->name('login');
+        Route::get('/register', 'register')->name('register');
+        Route::post('/login', 'login_user');
+        Route::post('/register', 'register_user');
+    });
 
-
-    Route::post('/login', 'login_user')->middleware(['guest']);
-    Route::post('/register', 'register_user')->middleware(['guest']);
-    Route::post('/logout', 'logout')->middleware(['auth']);
-    Route::delete('/destroy', 'destroyAccount')->middleware(['auth']);
-    Route::post('/update', 'update')->middleware(['auth']);
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/profile', 'profile');
+        Route::post('/logout', 'logout');
+        Route::post('/update', 'update');
+        Route::delete('/destroy', 'destroyAccount');
+    });
 });

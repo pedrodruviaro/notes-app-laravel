@@ -20,7 +20,7 @@
 
 -   [x] Revisão do AuthController
 -   [x] Revisão do NotesController
--   [ ] Revisão das rotas da aplicação
+-   [x] Revisão das rotas da aplicação
 
 ## Future
 
