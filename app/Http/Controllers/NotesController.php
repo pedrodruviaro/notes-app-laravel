@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -74,5 +73,16 @@ class NotesController extends Controller
         return redirect("/note/$note->id");
     }
 
-    public function destroy(): void {}
+    public function destroy(Note $note): RedirectResponse
+    {
+        $user_id = Auth::user()->id;
+
+        if ($note->user_id != $user_id) {
+            abort(401);
+        }
+
+        $note->delete();
+
+        return redirect('/');
+    }
 }

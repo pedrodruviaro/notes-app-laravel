@@ -13,7 +13,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::post('/show', 'save');
         Route::patch('/edit/{note}', 'update');
-        Route::delete('/delete/{id}', 'destroy');
+        Route::delete('/delete/{note}', 'destroy');
     });
 });
 
