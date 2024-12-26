@@ -18,8 +18,8 @@
 -   [x] Componente de label com input e mensagem de erro
 -   [x] Componente de nav-link com marcação de página atual
 
--   [ ] Revisão do AuthController
--   [ ] Revisão do NotesController
+-   [x] Revisão do AuthController
+-   [x] Revisão do NotesController
 -   [ ] Revisão das rotas da aplicação
 
 ## Future

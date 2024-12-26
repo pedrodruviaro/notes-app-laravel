@@ -13,17 +13,15 @@ class NotesController extends Controller
 {
     public function index(): View
     {
-        $userId = Auth::user()->id;
-        $notes = Note::where('user_id', $userId)->whereNull('deleted_at')->latest()->paginate(5);
+
+        $notes = Note::where('user_id', Auth::id())->whereNull('deleted_at')->latest()->paginate(5);
 
         return view('notes.index', ['notes' => $notes]);
     }
 
     public function show(Note $note): View
     {
-        $user_id = Auth::user()->id;
-
-        if ($note->user_id != $user_id || $note->deleted_at != null) {
+        if ($note->user_id != Auth::id() || $note->deleted_at != null) {
             abort(404);
         }
 
@@ -38,9 +36,7 @@ class NotesController extends Controller
 
     public function edit(Note $note): View
     {
-        $user_id = Auth::user()->id;
-
-        if ($note->user_id != $user_id) {
+        if ($note->user_id != Auth::id()) {
             abort(404);
         }
 
@@ -55,18 +51,15 @@ class NotesController extends Controller
         ]);
 
         $note = new  Note($attributes);
-        $note->user_id = Auth::user()->id;
+        $note->user_id = Auth::id();
         $note->save();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Note created successfully');
     }
 
     public function update(Request $request, Note $note): RedirectResponse
     {
-
-        $user_id = Auth::user()->id;
-
-        if ($note->user_id != $user_id) {
+        if ($note->user_id != Auth::id()) {
             abort(401);
         }
 
@@ -82,7 +75,7 @@ class NotesController extends Controller
         $note->updated_at = Carbon::now();
         $note->save();
 
-        return redirect("/note/$note->id");
+        return redirect("/note/$note->id")->with('success', 'Note updated successfully');
     }
 
     public function destroy(Note $note): RedirectResponse
@@ -100,17 +93,15 @@ class NotesController extends Controller
 
     public function show_deleted(): View
     {
-        $user_id = Auth::user()->id;
-        $notes = Note::withTrashed()->where('user_id', $user_id)->whereNotNull('deleted_at')->latest()->paginate(5);
+        $notes = Note::withTrashed()->where('user_id', Auth::id())->whereNotNull('deleted_at')->latest()->paginate(5);
 
-        return view('notes.deleted', ['notes' => $notes]);
+        return view('notes.deleted', ['notes' => $notes])->with('success', 'Note deleted successfully');
     }
 
     public function restore(string $id): RedirectResponse
     {
-        $user_id = Auth::user()->id;
 
-        $note = Note::withTrashed()->where('id', $id)->where('user_id', $user_id)->first();
+        $note = Note::withTrashed()->where('id', $id)->where('user_id', Auth::id())->first();
 
         if (!$note) {
             abort(404);
@@ -118,6 +109,6 @@ class NotesController extends Controller
 
         $note->restore();
 
-        return redirect("/note/{$note->id}");
+        return redirect("/note/{$note->id}")->with('success', 'Note restored successfully');
     }
 }
