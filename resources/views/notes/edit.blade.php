@@ -1,26 +1,11 @@
 <x-layout.main title="Edit">
     <x-base.page-title>Edit your note</x-base.page-title>
 
-    <form action="/edit/{{ $note->id }}" method="POST" class="space-y-4">
-        @csrf
+    <x-forms.form action="/edit/{{ $note->id }}" method="POST">
         @method('PATCH')
 
-        <label class="grid gap-1 font-semibold">
-            Title
-            <input class="px-4 py-2 border rounded-md font-normal" placeholder="Goals for the day" name="title"
-                value="{{ $note->title }}">
-            @error('title')
-                <p class="text-red-400">{{ $message }}</p>
-            @enderror
-        </label>
-
-        <label class="grid gap-1 font-semibold">
-            Note
-            <textarea class="px-4 py-2 border rounded-md font-normal" name="content" rows="8">{{ $note->content }}</textarea>
-            @error('content')
-                <p class="text-red-400">{{ $message }}</p>
-            @enderror
-        </label>
+        <x-forms.input label="Title" name="title" placeholder="Goals for the day" value="{{ $note->title }}" />
+        <x-forms.textarea label="Note" name="content" rows="8">{{ $note->content }}</x-forms.textarea>
 
         <div class="flex flex-wrap gap-4 justify-between items-center">
             <x-base.button variant="secondary" as="button" type="submit">
@@ -31,5 +16,5 @@
                 Cancel
             </x-base.button>
         </div>
-    </form>
+    </x-forms.form>
 </x-layout.main>

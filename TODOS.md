@@ -11,6 +11,17 @@
 -   [x] Página de notas apagadas
 -   [x] Ao apagar o usuário (soft deletes)
 
+## Refinamentos
+
+-   [x] Componente formulário
+-   [x] Componente de mensagem de erro
+-   [x] Componente de label com input e mensagem de erro
+-   [ ] Componente de nav-link com marcação de página atual
+
+-   [ ] Revisão do AuthController
+-   [ ] Revisão do NotesController
+-   [ ] Revisão das rotas da aplicação
+
 ## Future
 
 -   [ ] Notas podem ter tags
