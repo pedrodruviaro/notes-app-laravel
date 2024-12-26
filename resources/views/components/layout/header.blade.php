@@ -6,6 +6,7 @@
 
         <nav class="flex items-center gap-4">
             @auth
+                <a href="/deleted">Profile</a>
                 <a href="/create">Create</a>
                 <a href="/deleted">Archived</a>
 

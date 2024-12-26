@@ -67,7 +67,18 @@ class AuthController extends Controller
         return redirect('/login');
     }
 
-    public function update(): void {}
+    public function profile()
+    {
+        return view('profile.index');
+    }
 
-    public function destroy(): void {}
+    public function destroy(): RedirectResponse
+    {
+        $user_id = Auth::user()->id;
+
+        User::destroy($user_id);
+        Auth::logout();
+
+        return redirect('/login');
+    }
 }

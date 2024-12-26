@@ -9,7 +9,7 @@
 -   [x] Ver detalhe da nota
 -   [x] Apagar nota (soft delete)
 -   [x] Página de notas apagadas
--   [ ] Ao apagar o usuário, apagar todas as notas dele
+-   [x] Ao apagar o usuário (soft deletes)
 
 ## Future
 

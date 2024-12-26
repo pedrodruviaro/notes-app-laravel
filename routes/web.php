@@ -22,10 +22,12 @@ Route::middleware(['auth'])->group(function () {
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'login')->name('login')->middleware(['guest']);
     Route::get('/register', 'register')->name('register')->middleware(['guest']);
+    Route::get('/profile', 'profile')->middleware(['auth']);
+
 
     Route::post('/login', 'login_user')->middleware(['guest']);
     Route::post('/register', 'save')->middleware(['guest']);
     Route::post('/logout', 'logout')->middleware(['auth']);
-    Route::post('/destroy', 'destroy')->middleware(['auth']);
+    Route::delete('/destroy', 'destroy')->middleware(['auth']);
     Route::post('/update', 'update')->middleware(['auth']);
 });
