@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NotesController;
+use App\Http\Controllers\TagsController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
@@ -16,6 +17,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/create', 'save');
         Route::patch('/edit/{note}', 'update');
         Route::delete('/delete/{note}', 'destroy');
+    });
+
+    Route::controller(TagsController::class)->group(function () {
+        Route::get('/tags', 'index')->name('tags');
+        Route::get('/tags/{tag}', 'show')->name('tag');
+        Route::post('/tags', 'store')->name('create_tag');
     });
 });
 

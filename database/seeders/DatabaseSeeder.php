@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            NotesSeeder::class
+            NotesSeeder::class,
+            TagsSeeder::class
         ]);
 
         User::factory()->create([

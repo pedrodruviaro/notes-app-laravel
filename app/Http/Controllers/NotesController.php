@@ -14,7 +14,7 @@ class NotesController extends Controller
     public function index(): View
     {
 
-        $notes = Note::where('user_id', Auth::id())->whereNull('deleted_at')->latest()->paginate(5);
+        $notes = Note::with('tags')->where('user_id', Auth::id())->whereNull('deleted_at')->latest()->paginate(5);
 
         return view('notes.index', ['notes' => $notes]);
     }

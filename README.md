@@ -28,7 +28,6 @@
 
 ## Future
 
--   [ ] Notas podem ter tags
--   [ ] note_tag pivot table
--   [ ] Exibir todas as notas de uma determinada tag
--   [ ] Testar uso de enum
+-   [x] Notas podem ter tags
+-   [x] note_tag pivot table
+-   [x] Exibir todas as notas de uma determinada tag

@@ -12,4 +12,9 @@ class Note extends Model
     use SoftDeletes;
 
     protected $fillable = ['title', 'content'];
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

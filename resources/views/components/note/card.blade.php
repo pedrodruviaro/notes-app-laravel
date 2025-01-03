@@ -1,6 +1,13 @@
 @props(['note', 'isDeleted' => false])
 
 <article class="p-4 lg:p-8 rounded-xl bg-white border">
+
+    <div class="mb-4">
+        @foreach ($note->tags as $tag)
+            <p class="text-sm bg-black text-white rounded-full px-2 py-0.5 max-w-max">{{ $tag->name }}</p>
+        @endforeach
+    </div>
+
     <h3 class="font-semibold text-lg lg:text-xl mb-2">{{ $note->title }}</h3>
 
     <p>{{ $note->content }}</p>
